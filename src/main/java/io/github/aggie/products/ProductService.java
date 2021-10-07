@@ -2,7 +2,9 @@ package io.github.aggie.products;
 
 import io.github.aggie.common.PagedResult;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
 public class ProductService {
 
