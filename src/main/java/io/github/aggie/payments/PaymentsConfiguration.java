@@ -1,20 +1,31 @@
 package io.github.aggie.payments;
 
-import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Scope;
 
 @EnableAspectJAutoProxy
 @Configuration
 public class PaymentsConfiguration {
 
-
-    @Scope(BeanDefinition.SCOPE_SINGLETON)
     @Bean
-    public PaymentIdGenerator incrementalPaymentIdGenerator() {
+    public PaymentIdGenerator paymentIdGenerator() {
         return new IncrementalPaymentIdGenerator();
     }
 
+    @Bean
+    public PaymentRepository paymentRepository() {
+        return new HashMapPaymentRepository();
+    }
+
+    @Bean
+    public PaymentService paymentService(PaymentIdGenerator paymentIdGenerator, PaymentRepository paymentRepository) {
+        return new FakePaymentService(paymentIdGenerator, paymentRepository);
+    }
+
+    @Bean
+    public PaymentConsoleLogger paymentConsoleLogger(MessageSource messageSource) {
+        return new PaymentConsoleLogger(messageSource);
+    }
 }
