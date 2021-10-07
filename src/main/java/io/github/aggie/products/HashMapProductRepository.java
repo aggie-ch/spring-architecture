@@ -1,6 +1,6 @@
 package io.github.aggie.products;
 
-import io.github.aggie.common.PageResult;
+import io.github.aggie.common.PagedResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,11 +20,11 @@ public class HashMapProductRepository implements ProductRepository {
     }
 
     @Override
-    public PageResult<Product> findAll(int pageNumber, int pageSize) {
+    public PagedResult<Product> findAll(int pageNumber, int pageSize) {
 
         var totalPages = (int) Math.ceil((double) products.size() / pageSize);
         var data = new ArrayList<>(products.values());
 
-        return new PageResult(data, pageNumber, totalPages);
+        return new PagedResult(data, pageNumber, totalPages);
     }
 }

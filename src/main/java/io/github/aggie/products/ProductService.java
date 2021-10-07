@@ -1,6 +1,6 @@
 package io.github.aggie.products;
 
-import io.github.aggie.common.PageResult;
+import io.github.aggie.common.PagedResult;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -12,7 +12,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public PageResult<Product> getAll(int pageNumber, int pageSize) {
+    public PagedResult<Product> getAll(int pageNumber, int pageSize) {
         return productRepository.findAll(pageNumber, pageSize);
     }
 }

@@ -5,7 +5,7 @@ import lombok.Value;
 import java.util.List;
 
 @Value
-public class PageResult<T> {
+public class PagedResult<T> {
 
     List<T> data;
     int pageNumber;

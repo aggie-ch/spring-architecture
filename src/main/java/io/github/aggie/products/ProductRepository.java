@@ -1,10 +1,10 @@
 package io.github.aggie.products;
 
-import io.github.aggie.common.PageResult;
+import io.github.aggie.common.PagedResult;
 
 public interface ProductRepository {
 
     Product save(Product product);
 
-    PageResult<Product> findAll(int pageNumber, int pageSize);
+    PagedResult<Product> findAll(int pageNumber, int pageSize);
 }
