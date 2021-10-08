@@ -10,5 +10,4 @@ public class PaymentRequest {
 
     Long id;
     FastMoney money;
-
 }

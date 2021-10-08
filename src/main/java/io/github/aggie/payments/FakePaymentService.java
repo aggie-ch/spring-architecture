@@ -1,5 +1,6 @@
 package io.github.aggie.payments;
 
+import io.github.aggie.common.profiler.ExecutionTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.context.ApplicationEventPublisher;
@@ -16,6 +17,7 @@ public class FakePaymentService implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final ApplicationEventPublisher eventPublisher;
 
+    @ExecutionTime
     @LogPayments
     @Override
     public Payment process(PaymentRequest paymentRequest) {
