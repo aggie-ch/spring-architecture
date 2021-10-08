@@ -9,6 +9,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.javamoney.moneta.FastMoney;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Data
@@ -17,6 +18,7 @@ import java.util.List;
 public class Order {
 
     private Long id;
+    @NotEmpty
     @NonNull
     private List<Product> products;
     private Payment payment;
