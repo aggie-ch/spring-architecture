@@ -1,6 +1,7 @@
 package io.github.aggie.common;
 
 import io.github.aggie.common.profiler.Profiler;
+import io.github.aggie.common.retry.MethodExecutor;
 import io.github.aggie.common.validator.ModelValidator;
 import io.github.aggie.common.validator.ValidatorService;
 import org.springframework.context.annotation.Bean;
@@ -30,5 +31,10 @@ public class CommonConfiguration {
     @Bean
     public ModelValidator modelValidator(ValidatorService validatorService) {
         return new ModelValidator(validatorService);
+    }
+
+    @Bean
+    public MethodExecutor methodExecutor() {
+        return new MethodExecutor();
     }
 }
