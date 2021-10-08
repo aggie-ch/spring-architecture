@@ -1,11 +1,10 @@
 package io.github.aggie.payments;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-@EnableAspectJAutoProxy
 @Configuration
 public class PaymentsConfiguration {
 
@@ -20,8 +19,8 @@ public class PaymentsConfiguration {
     }
 
     @Bean
-    public PaymentService paymentService(PaymentIdGenerator paymentIdGenerator, PaymentRepository paymentRepository) {
-        return new FakePaymentService(paymentIdGenerator, paymentRepository);
+    public PaymentService paymentService(PaymentIdGenerator paymentIdGenerator, PaymentRepository paymentRepository, ApplicationEventPublisher eventPublisher) {
+        return new FakePaymentService(paymentIdGenerator, paymentRepository, eventPublisher);
     }
 
     @Bean
