@@ -1,11 +1,11 @@
-version: '4'
+version: '5'
 services:
   database:
     image: postgres:11.2-alpine
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=shopDB
+      - POSTGRES_DB=shopDatabase
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - PGDATA=/var/lib/postgresql/data/application
