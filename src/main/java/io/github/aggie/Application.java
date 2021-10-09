@@ -40,6 +40,8 @@ public class Application {
             var payment = shopService.payForOrder(order.getId());
             log.info(payment.getId());
 
+            log.info(shopService.getByName("Java").toString());
+            log.info(shopService.getByName("Java").toString());
         }
     }
 }

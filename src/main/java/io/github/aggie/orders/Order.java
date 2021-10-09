@@ -1,5 +1,6 @@
 package io.github.aggie.orders;
 
+import io.github.aggie.common.BaseEntity;
 import io.github.aggie.payments.LocalMoney;
 import io.github.aggie.payments.Payment;
 import io.github.aggie.products.Product;
@@ -14,20 +15,18 @@ import java.util.List;
 
 @Table(name = "orders")
 @Entity
-@Data
-@EqualsAndHashCode(exclude = "id")
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Order {
+public class Order extends BaseEntity {
 
-    @GeneratedValue
-    @Id
-    private Long id;
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @NotEmpty
     @NonNull
     private List<Product> products;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     @Valid
     private Payment payment;
     private Instant timestamp;

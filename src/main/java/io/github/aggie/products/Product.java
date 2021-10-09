@@ -1,5 +1,6 @@
 package io.github.aggie.products;
 
+import io.github.aggie.common.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.Columns;
 import org.javamoney.moneta.FastMoney;
@@ -10,17 +11,15 @@ import javax.persistence.*;
 @Table(name = "products", indexes = @Index(name = "product_type", columnList = "type"))
 @Entity
 @Builder
-@Data
-@EqualsAndHashCode(exclude = "id")
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Product extends BaseEntity {
 
     public static final String SELECT_PRODUCTS = "selectProducts";
 
-    @GeneratedValue
-    @Id
-    private Long id;
     private String name;
     private String description;
     @Columns(columns = {
