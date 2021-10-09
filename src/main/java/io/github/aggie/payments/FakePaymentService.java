@@ -4,11 +4,13 @@ import io.github.aggie.common.profiler.ExecutionTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.time.Instant;
 
+@Transactional
 @Log
 @RequiredArgsConstructor
 public class FakePaymentService implements PaymentService {

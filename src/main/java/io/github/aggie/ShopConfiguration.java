@@ -1,9 +1,6 @@
 package io.github.aggie;
 
 import com.zaxxer.hikari.HikariDataSource;
-import io.github.aggie.orders.OrderService;
-import io.github.aggie.payments.PaymentService;
-import io.github.aggie.products.ProductService;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.cache.CacheManager;
@@ -39,11 +36,6 @@ public class ShopConfiguration {
     @Bean
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager("products");
-    }
-
-    @Bean
-    public ShopService shopService(OrderService orderService, PaymentService paymentService, ProductService productService) {
-        return new ShopService(orderService, paymentService, productService);
     }
 
     @Bean
