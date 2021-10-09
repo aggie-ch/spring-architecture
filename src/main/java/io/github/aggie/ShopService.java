@@ -9,7 +9,9 @@ import io.github.aggie.payments.PaymentService;
 import io.github.aggie.products.Product;
 import io.github.aggie.products.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @RequiredArgsConstructor
 public class ShopService {
 
