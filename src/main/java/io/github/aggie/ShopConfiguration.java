@@ -63,7 +63,7 @@ public class ShopConfiguration {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManager(DataSource dataSource, Properties jpaProperties) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Properties jpaProperties) {
         var factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setJpaProperties(jpaProperties);
