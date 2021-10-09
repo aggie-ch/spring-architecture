@@ -1,6 +1,5 @@
 package io.github.aggie.payments;
 
-import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -12,11 +11,6 @@ public class PaymentsConfiguration {
     @Bean
     public PaymentIdGenerator paymentIdGenerator() {
         return new IncrementalPaymentIdGenerator();
-    }
-
-    @Bean
-    public PaymentRepository paymentRepository(SessionFactory sessionFactory) {
-        return new HibernatePaymentRepository(sessionFactory);
     }
 
     @Bean

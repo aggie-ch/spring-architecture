@@ -4,7 +4,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import io.github.aggie.orders.OrderService;
 import io.github.aggie.payments.PaymentService;
 import io.github.aggie.products.ProductService;
-import org.hibernate.SessionFactory;
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -14,16 +14,19 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
 
 @PropertySource("classpath:jdbc.properties")
+@EnableJpaRepositories(basePackages = "io.github.aggie")
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 @Configuration
@@ -53,23 +56,24 @@ public class ShopConfiguration {
     }
 
     @Bean
-    public PropertiesFactoryBean hibernateProperties() {
+    public PropertiesFactoryBean jpaProperties() {
         PropertiesFactoryBean factoryBean = new PropertiesFactoryBean();
-        factoryBean.setLocation(new ClassPathResource("hibernate.properties"));
+        factoryBean.setLocation(new ClassPathResource("jpa.properties"));
         return factoryBean;
     }
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory(DataSource dataSource, Properties hibernateProperties) {
-        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+    public LocalContainerEntityManagerFactoryBean entityManager(DataSource dataSource, Properties jpaProperties) {
+        var factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setHibernateProperties(hibernateProperties);
+        factoryBean.setJpaProperties(jpaProperties);
         factoryBean.setPackagesToScan("io.github.aggie");
+        factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         return factoryBean;
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
-        return new HibernateTransactionManager(sessionFactory);
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
     }
 }
