@@ -1,9 +1,8 @@
-package io.github.aggie.web;
+package io.github.aggie.common.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import java.util.List;
 

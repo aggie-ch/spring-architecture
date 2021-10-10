@@ -1,7 +1,7 @@
 package io.github.aggie.users;
 
 import io.github.aggie.common.PagedResult;
-import io.github.aggie.web.PagedResultTransferObject;
+import io.github.aggie.common.web.PagedResultTransferObject;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

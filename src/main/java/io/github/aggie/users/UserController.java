@@ -1,9 +1,9 @@
 package io.github.aggie.users;
 
 import io.github.aggie.common.PagedResult;
-import io.github.aggie.web.ExceptionTransferObject;
-import io.github.aggie.web.PagedResultTransferObject;
-import io.github.aggie.web.UriBuilder;
+import io.github.aggie.common.web.ExceptionTransferObject;
+import io.github.aggie.common.web.PagedResultTransferObject;
+import io.github.aggie.common.web.UriBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

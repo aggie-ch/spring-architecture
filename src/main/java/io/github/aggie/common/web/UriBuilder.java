@@ -1,4 +1,4 @@
-package io.github.aggie.web;
+package io.github.aggie.common.web;
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
