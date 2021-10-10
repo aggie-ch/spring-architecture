@@ -1,7 +1,11 @@
 package io.github.aggie.users;
 
-import io.github.aggie.common.UriBuilder;
+import io.github.aggie.common.PagedResult;
+import io.github.aggie.web.ExceptionTransferObject;
+import io.github.aggie.web.PagedResultTransferObject;
+import io.github.aggie.web.UriBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +32,20 @@ public class UserController {
         User user = userService.getById(id);
         UserTransferObject userTransferObject = userMapper.toUserTransferObject(user);
         return ResponseEntity.ok(userTransferObject);
+    }
+
+    @GetMapping
+    public PagedResultTransferObject<UserTransferObject> getUsersByLastName(@RequestParam String lastNameFragment,
+                                                                            @RequestParam(defaultValue = "0") int pageNumber,
+                                                                            @RequestParam(defaultValue = "5") int pageSize) {
+        PagedResult<User> users = userService.getByLastName(lastNameFragment, pageNumber, pageSize);
+        return userMapper.toUserTransferObjectsPage(users);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ExceptionTransferObject> onUserNotFound(UserNotFoundException exception) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ExceptionTransferObject("User not found"));
     }
 }
